@@ -1,0 +1,31 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="sync.ca.sd.create.newcontract.controller.Complete"
+>
+    <Page
+        id="orderCompletedPage"
+        title="{i18n>orderCompletedTitle}"
+        backgroundDesign="Solid"
+        class="sapUiContentPadding"
+    >
+        <content>
+            <FormattedText
+                id="orderCompletedText"
+                htmlText=""
+            />
+        </content>
+        <!-- <footer>
+            <Bar>
+                <contentRight>
+                    <Button
+                        id="returnToShopButton"
+                        type="Emphasized"
+                        text="{i18n>returnToShopButtonText}"
+                        press=".onReturnToShopButtonPress"
+                    />
+                </contentRight>
+            </Bar>
+        </footer> -->
+    </Page>
+</mvc:View>

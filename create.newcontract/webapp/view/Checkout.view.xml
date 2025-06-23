@@ -1,0 +1,387 @@
+    <mvc:View
+        controllerName="sync.ca.sd.create.newcontract.controller.Checkout"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m"
+        xmlns:c="sap.ui.core"
+        xmlns:form="sap.ui.layout.form"
+        xmlns:formatter="sync.ca.sd.create.newcontract.model.formatter"
+    >
+        <!-- id="CheckoutView" -->
+            <NavContainer id="wizardNavContainer">
+                <pages>
+                    <Page
+                        id="wizardContentPage"
+                        title="{i18n>checkoutTitle}"
+                    >
+                    
+                    <Bar>
+                        <!-- id="idStep2Page" -->
+                        <contentLeft>
+                            <Button
+                                icon="sap-icon://nav-back"
+                                press=".onBack"
+                                tooltip="Back to Customer Info"
+                            />
+                        </contentLeft>
+                    </Bar>
+             
+                    <Wizard
+                        id="ShoppingCartWizard"
+                        complete="onComplete"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        finishButtonText="{i18n>checkoutSummaryFinish}"
+                    >
+                         
+                        <WizardStep
+                            id="ContentsStep"
+                            nextStep="CustomerInfoStep"
+                            title="{i18n>wizardStep1Title}"
+                            icon="sap-icon://cart"
+                        >
+
+                            <!-- <ObjectHeader
+                                title="{i18n>totalTitle}"
+                                number="{ path: 'cartModel>/CartItems', formatter: '.formatter.totalCartPrice' }"
+                                numberUnit="KRW"
+                                class="sapUiLargeMarginTop sapUiTinyMarginBottom"
+                            >
+                            </ObjectHeader> -->
+                            <ObjectHeader
+                            title="{i18n>totalTitle}"
+                            number="{ path: 'cartModel>/CartItems', formatter: '.formatter.totalCartPrice' }"
+                            numberUnit="KRW"
+                            class="sapUiSmallMarginTop sapUiTinyMarginBottom"
+                            />
+                            <List     
+                                items="{cartModel>/CartItems}"
+                                enableBusyIndicator="true"
+                                delete="onCartItemDelete"
+                                headerText="{i18n>itemsInCart}"
+                            >
+                                <StandardListItem
+                                    title="{cartModel>Maktx}"
+                                    description="{= ${cartModel>Quantity} + ' KG / ' + ${ path: 'cartModel>Regprice', formatter: '.formatter.price' } + ' ' + ${cartModel>Waers} }"
+                                    icon="{ path: 'cartModel>Matnr', formatter: '.formatter.pictureUrl' }"
+                                    iconDensityAware="false"
+                                    iconInset="false"
+                                    info="{ path : 'cartModel>Netwr', formatter : '.formatter.price' } KRW"
+                                />
+                                <!-- info="{ path: 'cartModel>/CartItems', formatter: '.formatter.totalCartPrice' } KRW" -->
+                            </List>
+                        </WizardStep>
+                        <WizardStep
+                            id="CustomerInfoStep"
+                            title="{i18n>CustomerTitle}"
+                            icon="sap-icon://customer"
+                        >
+                            <VBox class="sapUiSmallMargin">
+                                <form:SimpleForm
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    title="{i18n>CustomerTitle}"
+                                    class="sapUiSmallMarginBottom"
+                                >
+                                    <Label text="{i18n>customerCode}" />
+                                    <Text text="{contractModel>/Cuscode}" />
+
+                                    <Label text="{i18n>customerName}" />
+                                    <Text text="{contractModel>/Cusname}" />
+
+                                    <Label text="사업자등록번호" />
+                                    <Text text="{customerModel>/Bpcsnr}" />
+
+                                    <Label text="대표자명" />
+                                    <Text text="{customerModel>/Bphaed}" />
+
+                                    <Label text="주소" />
+                                    <Text text="{customerModel>/Bpadrr}" />
+
+                                    <Label text="이메일" />
+                                    <Text text="{customerModel>/Zemail}" />
+
+                                    <!-- <Label text="{i18n>startDate}" />
+                                    <Text text="{contractModel>/Vbegdat}" />
+
+                                    <Label text="{i18n>endDate}" />
+                                    <Text text="{contractModel>/Venddat}" /> -->
+
+                                    <!-- <Label text="Contract Period" />
+                                    <Text
+                                        text="{= ${contractModel>/Vlaufz} + ' ' + ${contractModel>/Vlauez} }"
+                                    /> -->
+                                    <!-- 
+                                    <Label text="{i18n>deliveryCycle}" />
+                                    <Text
+                                        text="{= ${contractModel>/Valdel} + ' ' + ${contractModel>/Valunit} }"
+                                    /> -->
+                                    <!-- 
+                                    <Label text="{i18n>totalDeliveries}" />
+                                    <Text text="{contractModel>/Totdelvnum}" /> -->
+
+                                    <!-- <Label text="사업자등록번호" />
+                                    <Text text="{customerModel>Bpcsnr}" /> -->
+                                    <!--                                
+
+                                    <Label text="대표자명" />
+                                    <Text text="{customerModel>Bphaed}" />
+
+                                    <Label text="이메일" />
+                                    <Text text="{customerModel>Zemail}" />
+
+                                    <Label text="G/L 계정" />
+                                    <Text text="{customerModel>Saknr}" /> -->
+                                </form:SimpleForm>
+
+                                <!-- <ObjectHeader
+                            title="Total Contract Amount"
+                            number="{ path: 'cartModel>/CartItems', formatter: '.formatter.totalCartPrice' }"
+                            numberUnit="KRW"
+                            class="sapUiLargeMarginTop sapUiTinyMarginBottom"
+                        /> -->
+                            </VBox>
+                        </WizardStep>
+
+                        <WizardStep
+                            id="ContractSummaryStep"
+                            title="계약 정보 요약"
+                            icon="sap-icon://document"
+                        >
+                            <VBox class="sapUiSmallMargin">
+                                <form:SimpleForm
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    title="계약 정보"
+                                    class="sapUiSmallMarginBottom"
+                                >
+                                    <Label text="계약 시작일" />
+                                    <Text text="{contractModel>/Vbegdat}" />
+
+                                    <Label text="계약 종료일" />
+                                    <Text text="{contractModel>/Venddat}" />
+
+                                    <Label text="계약 체결일" />
+                                    <Text text="{contractModel>/Vuntdat}" />
+
+                                    <Label text="납품 주기" />
+                                    <Text
+                                        text="{= ${contractModel>/Valdel} + ' ' + ${contractModel>/Valunit} }"
+                                    />
+
+                                    <Label text="총 납품 횟수" />
+                                    <Text text="{contractModel>/Totdelvnum}" />
+                                </form:SimpleForm>
+                            </VBox>
+                        </WizardStep>
+                    </Wizard>
+                </Page>
+
+                <Page
+                    id="summaryPage"
+                    backgroundDesign="Solid"
+                    showHeader="false"
+                >
+                    <content>
+                        <Panel>
+                            <headerToolbar>
+                                <Toolbar id="toolbarProductList">
+                                    <Title
+                                        id="checkoutItems"
+                                        text="{i18n>checkoutSummaryTitle1}"
+                                        level="H2"
+                                        titleStyle="H4"
+                                    />
+                                    <ToolbarSpacer />
+                                    <!-- <Button
+                                        id="backtoList"
+                                        icon="sap-icon://edit"
+                                        tooltip="{i18n>backToWizard}"
+                                        type="Emphasized"
+                                        press="._navBackToStep"
+                                    > -->
+                                        <!-- <customData>
+                                            <core:CustomData
+                                                key="navBackTo"
+                                                value="contentsStep"
+                                            />
+                                        </customData> -->
+                                    <!-- </Button> -->
+                                </Toolbar>
+                            </headerToolbar>
+                            <content>
+                                <List
+                                    id="summaryEntryList"
+                                    noDataText="{i18n>cartNoData}"
+                                    items="{cartModel>/CartItems}"
+                                >
+                                    <items>
+                                        <ObjectListItem
+                                            intro="{cartModel>Quantity} x"
+                                            icon="{ path: 'cartModel>Matnr', formatter: '.formatter.pictureUrl' }"
+                                            title="{cartModel>Maktx}"
+                                            number="{ path : 'cartModel>Netwr', formatter : '.formatter.price' }"
+                                            numberUnit="KRW"
+                                            iconDensityAware="false"
+                                        />
+                                    </items>
+                                </List>
+                            </content>
+                        </Panel>
+                        <form:SimpleForm
+                            layout="ResponsiveGridLayout"
+                            ariaLabelledBy="totalPriceTitle"
+                        >
+                            <form:toolbar>
+                                <Toolbar id="toolbarTotalPrice">
+                                    <ToolbarSpacer />
+                                    <Title
+                                        id="totalPriceTitle"
+                                        level="H3"
+                                        titleStyle="H4"
+                                        text="{ path: 'contractModel>/NetvalSum', formatter : '.formatter.price' } KRW"
+                                    />
+                                </Toolbar>
+                            </form:toolbar>
+                        </form:SimpleForm>
+                        <!-- 고객정보 -->
+                        <form:SimpleForm
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            ariaLabelledBy="toolbarPaymentTitle"
+                        >
+                            <form:toolbar>
+                                <Toolbar id="toolbarPayment">
+                                    <Title
+                                        id="toolbarPaymentTitle"
+                                        text="{i18n>checkoutSummaryTitle2}"
+                                        level="H2"
+                                        titleStyle="H4"
+                                    />
+                                    <ToolbarSpacer />
+                                    <!-- <Button
+                                        id="backToPaymentType"
+                                        icon="sap-icon://edit"
+                                        tooltip="{i18n>backToWizard}"
+                                        type="Emphasized"
+                                        press="._navBackToStep"
+                                    > -->
+                                        <!-- <customData>
+                                            <core:CustomData
+                                                key="navBackTo"
+                                                value="paymentTypeStep"
+                                            />
+                                        </customData> -->
+                                    <!-- </Button> -->
+                                </Toolbar>
+                            </form:toolbar>
+                            <form:content>
+                                <Label text="고객 코드" />
+                                <Text text="{contractModel>/Cuscode}" />
+
+                                <Label text="고객명" />
+                                <Text text="{contractModel>/Cusname}" />
+
+                                <Label text="사업자등록번호" />
+                                <Text text="{customerModel>/Bpcsnr}" />
+
+                                <Label text="대표자명" />
+                                <Text text="{customerModel>/Bphaed}" />
+
+                                <Label text="주소" />
+                                <Text text="{customerModel>/Bpadrr}" />
+
+                                <Label text="이메일" />
+                                <Text text="{customerModel>/Zemail}" />
+
+                                <!-- <Label text="Start Date" />
+                                <Text text="{contractModel>/Vbegdat}" />
+
+                                <Label text="End Date" />
+                                <Text text="{contractModel>/Venddat}" /> -->
+
+                                <!-- <Label text="Contract Period" />
+                                    <Text
+                                        text="{= ${contractModel>/Vlaufz} + ' ' + ${contractModel>/Vlauez} }"
+                                    /> -->
+
+                                <!-- <Label text="Delivery Cycle" />
+                                <Text
+                                    text="{= ${contractModel>/Valdel} + ' ' + ${contractModel>/Valunit} }"
+                                />
+
+                                <Label text="Total Deliveries" />
+                                <Text text="{contractModel>/Totdelvnum}" /> -->
+                            </form:content>
+                        </form:SimpleForm>
+
+                        <form:SimpleForm
+                            id="formContractInfo"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            ariaLabelledBy="titleContractInfo"
+                        >
+                            <!-- 상단 툴바 -->
+                            <form:toolbar>
+                                <Toolbar id="toolbarContractInfo">
+                                    <Title
+                                        id="titleContractInfo"
+                                        text="{i18n>contractInfoTitle}"
+                                        level="H2"
+                                        titleStyle="H4"
+                                    />
+                                    <ToolbarSpacer />
+                                    <!-- <Button
+                                        id="btnEditContractInfo"
+                                        icon="sap-icon://edit"
+                                        tooltip="{i18n>backToWizard}"
+                                        type="Emphasized"
+                                        press="._navBackToStep"
+                                    /> -->
+                                </Toolbar>
+                            </form:toolbar>
+
+                            <!-- 계약 본문 정보 -->
+                            <form:content>
+                                <Label text="{i18n>startDate}" />
+                                <Text text="{contractModel>/Vbegdat}" />
+
+                                <Label text="{i18n>endDate}" />
+                                <Text text="{contractModel>/Venddat}" />
+
+                                <Label text="{i18n>deliveryCycle}" />
+                                <Text
+                                    text="{
+                                            parts: [
+                                                'contractModel>/Valdel',
+                                                'contractModel>/Valunit'
+                                            ],
+                                            formatter: '.formatter.deliveryUnit'
+                                        }"
+                                />
+
+                                <Label text="{i18n>totalDeliveries}" />
+                                <Text text="{contractModel>/Totdelvnum}" />
+                            </form:content>
+                        </form:SimpleForm>
+                    </content>
+                    <footer>
+                        <Bar id="summaryFooterBar">
+                            <contentRight>
+                                <Button
+                                    id="submitOrder"
+                                    type="Accept"
+                                    text="{i18n>checkoutSummarySubmit}"
+                                    press=".handleWizardSubmit"
+                                />
+                                <Button
+                                    id="cancelOrder"
+                                    type="Reject"
+                                    text="{i18n>checkoutSummaryCancel}"
+                                    press=".handleWizardCancel"
+                                />
+                            </contentRight>
+                        </Bar>
+                    </footer>
+                </Page>
+            </pages>
+        </NavContainer>
+    </mvc:View>

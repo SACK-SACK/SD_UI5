@@ -1,0 +1,94 @@
+<mvc:View
+    controllerName="sync.ca.sd.create.newcontract.controller.BlockKimchi"
+    xmlns:formatter="sync.ca.sd.create.newcontract.model.formatter"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <FlexBox
+        wrap="Wrap"
+        justifyContent="Start"
+        items="{/ProductSet}"
+        class="sapUiMediumMargin sapUiContentPadding"
+    >
+        <items>
+            <VBox
+                width="18rem"
+                class="sapUiContentPadding sapUiShadow sapUiMediumMargin sapUiResponsiveMargin card-style"
+                visible="{ path: 'Matnr', formatter: '.formatter.isProduct' }"
+            >
+                <!-- 이미지 -->
+                <Image
+                    src="{ path: 'Matnr', formatter: '.formatter.pictureUrl' }"
+                    width="100%"
+                    height="11rem"
+                    class="sapUiTinyMarginBottom"
+                    decorative="true"
+                />
+
+                <!-- 제품명 -->
+                <ObjectIdentifier
+                    title="{Maktx}"
+                    titleActive="true"
+                    titlePress=".onSelectProduct"
+                    tooltip="{i18n>openProductDetails} {Maktx}"
+                    class="sapUiTinyMarginBottom sapMTextBold"
+                />
+
+                <!-- 상태 -->
+                <ObjectStatus
+                    text="{ path : 'Status', formatter : '.formatter.statusText' }"
+                    state="{ path : 'Status', formatter : '.formatter.statusState'}"
+                    class="sapUiTinyMarginBottom"
+                />
+
+                <ObjectNumber
+                    number="{ path : 'Regprice', formatter : '.formatter.price' }"
+                    numberUnit="KRW"
+                    class="sapUiSmallMarginTop"
+                />
+
+                <!-- 장바구니 버튼과 수량 -->
+                <HBox
+                    justifyContent="SpaceBetween"
+                    alignItems="Center"
+                    class="sapUiSmallMarginTop"
+                >
+                    <!--수량-->
+                    <HBox
+                        alignItems="Center"
+                        class="sapUiTinyMarginBottom"
+                    >
+                        <!-- <Text
+                        text="수량:"
+                        class="sapUiTinyMarginEnd"
+                    /> -->
+
+                        <StepInput
+                            value="{quantityModel>/quantities/${Matnr}}"
+                            change=".onQuantityChange"
+                            min="0"
+                            step="1"
+                            width="7rem"
+                        />
+                        <Text
+                            text="{Meins}"
+                            class="sapUiTinyMarginBegin"
+                        />
+                        <!-- ← 단위 표시 -->
+                    </HBox>
+
+                    <Button
+                        tooltip="{i18n>addToCart}"
+                        type="Emphasized"
+                        press=".onAddToCart"
+                        icon="sap-icon://cart-3"
+                    />
+                </HBox>
+            </VBox>
+        </items>
+    </FlexBox>
+</mvc:View>
