@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "sales_volume_display",
+			"path": "../../../sales_volume_display"
+		},
+		{
+			"name": "sales_vol_display",
+			"path": "../../../sales_vol_display"
+		},
+		{
+			"name": "display_chart",
+			"path": "../../../display_chart"
+		},
+		{
+			"name": "display_s_chart",
+			"path": "../../../display_s_chart"
+		}
+	],
+	"settings": {}
+}

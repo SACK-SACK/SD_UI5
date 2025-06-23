@@ -1,0 +1,225 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="sync.ca.sd.create.newcontract.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:core="sap.ui.core"
+    xmlns:mdcvh="sap.ui.mdc.valuehelp"
+    xmlns:mdcvc="sap.ui.mdc.valuehelp.content"
+    displayBlock="true"
+>
+    <Page
+        id="idMainPage"
+        class="sapUiResponsiveContentPadding"
+        title="{i18n>title}"
+    >
+        <Panel>
+            <form:SimpleForm
+                id="idSimpleForm"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <form:toolbar>
+                    <OverflowToolbar>
+                        <Title text="신규 계약 정보" />
+                        <ToolbarSpacer />
+                        <!-- <Button
+                            text="Test"
+                            press=".onTest"
+                            type="Emphasized"
+                        /> -->
+                        <Button
+                            text="Proceed"
+                            press="onProceed"
+                            type="Emphasized"
+                        />
+                    </OverflowToolbar>
+                </form:toolbar>
+
+                <!-- 고객명 -->
+                <Label
+                    text="고객명"
+                    labelFor="customerField"
+                />
+                <mdc:Field
+                    id="customerInput"
+                    value="{contractModel>/Cusname}"
+                    editMode="Editable"
+                    display="Description"
+                    valueHelp="vhCustomer"
+                    change=".onCustomerSelected"
+                    required="true"
+                    fieldHelpOnly="true"
+                >
+                    <mdc:dependents>
+                        <mdc:ValueHelp
+                            id="vhCustomer"
+                            delegate="{name: 'sync/ca/sd/create/newcontract/delegate/SearchValueHelpDelegate', payload: { searchKeys: ['Name1', 'Kunnr'] }}"
+                        >
+                            <mdc:typeahead>
+                                <mdcvh:Popover title="고객 선택">
+                                    <mdcvc:MTable
+                                        keyPath="Kunnr"
+                                        descriptionPath="Name1"
+                                    >
+                                        <Table
+                                            items="{ path: '/CustomerSet' }"
+                                            width="30rem"
+                                        >
+                                            <columns>
+                                                <Column>
+                                                    <Text text="고객 코드" />
+                                                </Column>
+                                                <Column>
+                                                    <Text text="고객명" />
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem type="Active">
+                                                    <Text text="{Kunnr}" />
+                                                    <Text text="{Name1}" />
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </mdcvc:MTable>
+                                </mdcvh:Popover>
+                            </mdc:typeahead>
+                        </mdc:ValueHelp>
+                    </mdc:dependents>
+                </mdc:Field>
+                <!-- 이메일 -->
+                <Label text="이메일" />
+                <Input
+                    id="Email"
+                    value="{Zemail}"
+                    type="Email"
+                    editable="false"
+                    width="60%"
+                />
+
+                <!-- 사업자 번호 -->
+                <Label text="사업자 번호" />
+                <Input
+                    id="Bpcsnr"
+                    value="{Bpcsnr}"
+                    type="Tel"
+                    editable="false"
+                    width="60%"
+                />
+
+                <!-- 배송지 주소 -->
+                <Label text="배송지 주소" />
+                <Input
+                    id="Bpaddr"
+                    value="{Bpadrr}"
+                    editable="false"
+                    width="60%"
+                />
+
+                <!-- 계약 시작일 -->
+                <Label text="계약 시작일" />
+                <DatePicker
+                    id="datePickerVbegdat"
+                    value="{contractModel>/Vbegdat}"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    width="60%"
+                    required="true"
+                    change=".onVbegdatChanged"
+                    
+                />
+
+                <!-- 계약 종료일 -->
+                <Label text="계약 종료일" />
+                <DatePicker
+                    id="datePickerVenddat"
+                    value="{contractModel>/Venddat}"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    width="60%"
+                    required="true"
+                    change=".onEndDateChanged"
+                />
+
+                <!-- 계약 체결일 -->
+                <Label text="계약 체결일" />
+                <DatePicker
+                    value="{contractModel>/Vuntdat}"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    editable="false"
+                    width="60%"
+                />
+
+                <!-- 납품 주기 -->
+                <Label text="납품 주기" labelFor="valdelInput" required="true" />
+                <HBox>
+                    <Input
+                        id="valdelInput"
+                        width="5rem"
+                        type="Number"
+                        valueLiveUpdate="true"
+                        required="true"
+                        change=".onDeliveryInputChanged"
+                    />
+                    <Select
+                        id="valunitSelect"
+                        selectedKey="D"
+                        change=".onDeliveryInputChanged"
+                        width="8rem"
+                    >
+                        <items>
+                            <core:Item
+                                key="D"
+                                text="일"
+                            />
+                            <core:Item
+                                key="W"
+                                text="주"
+                            />
+                            <core:Item
+                                key="M"
+                                text="달"
+                            />
+                        </items>
+                    </Select>
+                </HBox>
+
+                <!-- 예상 납품 횟수 -->
+                <Label text="예상 납품 횟수" />
+                <!-- <Input value="{contractModel>Totdelvnum}" editable="false" width="100%" /> -->
+                <Input
+                    value="{contractModel>/Totdelvnum}"
+                    editable="false"
+                    required="true"
+                >
+                    <layoutData>
+                        <layout:GridData span="L1 M2 S6" />
+                    </layoutData>
+                </Input>
+
+                <!-- 계약 총금액 + 통화 -->
+                <!-- 추후 필요시 활성화 -->
+
+                <!-- 버튼 -->
+                <!-- <Button text="Proceed" press="onProceed" type="Emphasized">
+                    <layoutData><layout:GridData indentL="4" spanL="1" /></layoutData>
+                </Button> -->
+            </form:SimpleForm>
+        </Panel>
+    </Page>
+</mvc:View>

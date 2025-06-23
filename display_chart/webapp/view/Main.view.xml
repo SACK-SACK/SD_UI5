@@ -1,0 +1,25 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:smartChart="sap.ui.comp.smartchart"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns="sap.m"
+  controllerName="">
+
+  <smartFilterBar:SmartFilterBar
+    id="smartFilterBar"
+    entitySet="ZCA_SD_CDSV_131"
+    useToolbar="true"
+    liveMode="true" />
+
+  <smartChart:SmartChart
+    id="smartChart"
+    chartType="column"
+    entitySet="ZCA_SD_CDSV_131"
+    smartFilterId="smartFilterBar"
+    enableAutoBinding="true"
+    header="제품별 판매량 집계"
+    useVariantManagement="true"
+    useChartPersonalisation="true"
+    persistencyKey="ChartKey"
+  />
+</mvc:View>

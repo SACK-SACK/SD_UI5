@@ -1,0 +1,79 @@
+<mvc:View
+    controllerName="sync.ca.sd.create.newcontract.controller.Step2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:block="sync.ca.sd.create.newcontract.view.blocks"
+    xmlns:core="sap.ui.core"
+    model="odataModel"
+>
+    <m:Page showFooter="true">
+        <m:headerContent>
+            <m:Bar>
+                <!-- id="idStep2Page" -->
+
+                <m:contentLeft>
+                    <m:Button
+                        icon="sap-icon://nav-back"
+                        press=".onBack"
+                        tooltip="Back to Customer Info"
+                    />
+                </m:contentLeft>
+                <m:contentRight>
+                    <m:ToggleButton
+                        icon="sap-icon://cart"
+                        pressed="{= ${appView>/layout}.startsWith('TwoColumnsBeginExpanded') }"
+                        tooltip="{i18n>toCartButtonTooltip}"
+                        press=".onOpenCart"
+                    />
+                </m:contentRight>
+            </m:Bar>
+        </m:headerContent>
+        <m:content>
+            <ObjectPageLayout
+                id="ObjectPageLayout"
+                upperCaseAnchorBar="false"
+            >
+                <headerTitle>
+                    <ObjectPageHeader objectTitle="상품 정보" />
+                </headerTitle>
+
+                <!-- <headerContent>
+                    <m:ObjectAttribute
+                        text="제품 및 재료 정보를 확인할 수 있습니다."
+                    />
+                </headerContent> -->
+
+                <sections>
+                    <!-- 제품류 -->
+                    <ObjectPageSection
+                        title="제품류"
+                        titleUppercase="false"
+                    >
+                        <subSections>
+                            <ObjectPageSubSection title="김치">
+                                <blocks>
+                                    <block:BlockKimchi />
+                                </blocks>
+                            </ObjectPageSubSection>
+                        </subSections>
+                    </ObjectPageSection>
+
+                    <!-- 재료류 -->
+                    <ObjectPageSection
+                        title="재료류"
+                        titleUppercase="false"
+                    >
+                        <subSections>
+                            <ObjectPageSubSection title="김치 재료">
+                                <blocks>
+                                    <block:BlockIngredients />
+                                </blocks>
+                            </ObjectPageSubSection>
+                        </subSections>
+                    </ObjectPageSection>
+                </sections>
+            </ObjectPageLayout>
+        </m:content>
+    </m:Page>
+</mvc:View>

@@ -1,0 +1,175 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "sync.ca.sd.create.newcontract",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.16.5",
+      "toolsId": "85553e44-7e95-4b12-83ba-07cc17751d11"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZCA_GW_300_SRV_01/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.30",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sync.ca.sd.create.newcontract.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "clearControlAggregation": true,
+        "controlAggregation": "pages",
+        "controlId": "idFlexibleColumnLayout",
+        "transition": "show",
+        "type": "View",
+        "viewType": "XML",
+        "path": "sync.ca.sd.create.newcontract.view",
+        "async": true,
+        "viewPath": "sync.ca.sd.create.newcontract.view"
+      },
+      "routes": [
+        {
+          "name": "RouteMain",
+          "pattern": ":layout:",
+          "target": ["TargetMain"]
+        },
+        {
+          "pattern": "step1",
+          "name": "step1",
+          "target": ["step1"]
+        },
+        {
+          "pattern": "step2/{layout}",
+          "name": "step2",
+          "target": ["step2", "CartSidebar"]
+        },
+        {
+          "pattern": "CartSidebar/{layout}",
+          "name": "CartSidebar",
+          "target": ["step2", "CartSidebar"]
+        },
+        {
+          "name": "RouteMainWithCart",
+          "pattern": ":layout:CartSidebar",
+          "target": ["TargetMain", "CartSidebar"]
+        },
+        {
+          "name": "Checkout",
+          "pattern": "Checkout/{layout}",
+          "target": "Checkout"
+        },
+        {
+          "name": "Complete",
+          "pattern": "Complete/{Vbeln}/{layout}",
+          "target": "Complete"
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "id": "Main",
+          "name": "Main",
+          "controlAggregation": "beginColumnPages",
+          "transition": "show"
+        },
+        "step1": {
+          "id": "Step1",
+          "name": "Step1"
+        },
+        "step2": {
+          "id": "Step2",
+          "name": "Step2",
+          "controlAggregation": "beginColumnPages",
+          "transition": "fade"
+        },
+        "CartSidebar": {
+          "id": "CartSidebar",
+          "name": "CartSidebar",
+          "controlAggregation": "midColumnPages",
+          "transition": "flip"
+        },
+        "Checkout": {
+          "id": "checkoutPage",
+          "name": "Checkout",
+          "controlAggregation": "beginColumnPages",
+          "transition": "show"
+        },
+        "Complete": {
+          "id": "Complete",
+          "name": "Complete",
+          "controlAggregation": "beginColumnPages",
+          "transition": "show"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sync.ca.sd.create.newcontract.view.App",
+      "type": "XML",
+      "id": "App"
+    },
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties"
+    }
+  }
+}

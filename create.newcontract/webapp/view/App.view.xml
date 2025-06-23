@@ -1,0 +1,20 @@
+<mvc:View
+    controllerName="sync.ca.sd.create.newcontract.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+>
+    <App id="app">
+        <pages>
+            <f:FlexibleColumnLayout
+                id="idFlexibleColumnLayout"
+                layout="{appView>/layout}"
+                stateChange=".onStateChange"
+                
+            />
+            <!-- <mvc:XMLView id="step1" viewName="sync.ca.sd.create.newcontract.view.Main"/> -->
+            <!-- <mvc:XMLView id="step2" viewName="sync.ca.sd.create.newcontract.view.Step2"/> -->
+        </pages>
+    </App>
+</mvc:View>

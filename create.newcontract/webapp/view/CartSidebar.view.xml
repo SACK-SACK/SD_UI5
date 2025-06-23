@@ -1,0 +1,125 @@
+<mvc:View
+    controllerName="sync.ca.sd.create.newcontract.controller.CartSidebar"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:formatter="sync.ca.sd.create.newcontract.model.formatter"
+>
+    <Page
+        id="idCartPage"
+        title="장바구니"
+    >
+        <!-- <headerContent>
+           
+        </headerContent> -->
+        <Bar>
+            <!-- <contentRight>
+                <Button
+                    icon="sap-icon://home"
+                    press=".onHome"
+                    tooltip="Go to Home"
+                />
+            </contentRight>  -->
+            <contentLeft>
+                <Button
+                    icon="sap-icon://nav-back"
+                    press=".onBack"
+                    tooltip="Back to Product List"
+                />
+            </contentLeft>
+            <contentRight>
+                <Button
+                    id="editButton"
+                    icon="sap-icon://edit"
+                    enabled="{ path: 'cartModel>/CartItems', formatter: '.formatter.hasItems' }"
+                    visible="{cfg>/notInDelete}"
+                    press=".onEditOrDoneButtonPress"
+                    tooltip="{i18n>cartEditButtonTooltip}"
+                />
+            </contentRight>
+        </Bar>
+        <List
+            delete=".onCartItemDelete"
+            items="{cartModel>/CartItems}"
+            selectionChange=".onEntryListSelect"
+            mode="{cfg>/listMode}"
+        >
+            <items>
+                <ObjectListItem
+                    intro="{cartModel>Quantity} x"
+                    type="{cfg>/listItemType}"
+                    icon="{ path: 'cartModel>Matnr', formatter: '.formatter.pictureUrl' }"
+                    title="{cartModel>Maktx}"
+                    number="{ path : 'cartModel>Regprice', formatter : '.formatter.price' }"
+                    numberUnit="KRW"
+                    iconDensityAware="false"
+                    press=".onEntryListPress"
+                >
+                    <!-- <firstStatus>
+                        <ObjectStatus
+                            text="{ path : 'cartModel>Status', formatter : '.formatter.statusText' }"
+                            state="{ path : 'cartModel>Status', formatter : '.formatter.statusState' }"
+                        />
+                    </firstStatus> -->
+                </ObjectListItem>
+            </items>
+            <!-- <StandardListItem
+                title="{cartModel>Maktx}"
+                description="{= ${cartModel>Quantity} + '개 / ' + ${cartModel>Regprice} + ' ' + ${cartModel>Waers} }"
+                icon="sap-icon://cart"
+                iconInset="false"
+            /> -->
+
+            <!-- <CustomListItem>
+                <HBox
+                    justifyContent="SpaceBetween"
+                    alignItems="Center"
+                >
+                    <VBox>
+                        <Text text="{cartModel>Maktx}" />
+                        <Text
+                            text="{= ${cartModel>Quantity} + '개 / ' + ${cartModel>Regprice} + ' ' + ${cartModel>Waers} }"
+                        />
+                    </VBox>
+                    <Button
+                        icon="sap-icon://decline"
+                        type="Transparent"
+                        press=".onRemoveCartItem"
+                        tooltip="Remove"
+                        data="{cartModel>Id}"
+                    />
+                </HBox>
+            </CustomListItem> -->
+        </List>
+        <footer>
+            <Toolbar>
+                <!-- <Text
+                    id="totalPriceText"
+                    text="{ path: 'cartModel>/CartItems', formatter: '.formatter.totalCartPrice' } KRW"
+                    class="sapUiTinyMarginBegin"
+                />< -->
+                <Text
+                id="totalPriceText"
+                text="{ path: 'contractModel>/NetvalSum', formatter : '.formatter.price' } KRW"
+                class="sapUiTinyMarginBegin" />
+
+                <ToolbarSpacer />
+                <Button
+                    id="proceedButton"
+                    type="Accept"
+                    text="{i18n>cartProceedButtonText}"
+                    enabled="{ path: 'cartModel>/CartItems', formatter: '.formatter.hasItems' }"
+                    visible="{cfg>/notInDelete}"
+                    press=".onProceedButtonPress"
+                />
+                <Button
+                    id="doneButton"
+                    type="Accept"
+                    text="{i18n>cartDoneButtonText}"
+                    enabled="true"
+                    visible="{cfg>/inDelete}"
+                    press=".onEditOrDoneButtonPress"
+                />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
