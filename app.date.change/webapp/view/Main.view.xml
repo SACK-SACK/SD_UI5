@@ -1,0 +1,128 @@
+<mvc:View
+    controllerName="sync.ca.sd.app.date.change.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <IconTabBar
+            id="idIconTabBar"
+            select=".onFilterSelect"
+        >
+            <items>
+                <IconTabFilter
+                    showAll="true"
+                    count="{count>/Total}"
+                    text="전체"
+                    key="All"
+                />
+
+                <IconTabSeparator />
+
+                <IconTabFilter
+                    icon="sap-icon://pending"
+                    iconColor="Critical"
+                    count="{count>/Pending}"
+                    text="대기 중"
+                    key="W"
+                />
+
+                <IconTabFilter
+                    icon="sap-icon://accept"
+                    iconColor="Positive"
+                    count="{count>/Approved}"
+                    text="승인 완료"
+                    key="A"
+                />
+
+                <IconTabFilter
+                    icon="sap-icon://decline"
+                    iconColor="Negative"
+                    count="{count>/Rejected}"
+                    text="반려됨"
+                    key="R"
+                />
+            </items>
+        </IconTabBar>
+
+        <OverflowToolbar id="otbFooter">
+            <ToolbarSpacer />
+            <Button
+                type="Accept"
+                press=".onApprovePress"
+                text="{i18n>accept}"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <Button
+                type="Reject"
+                press=".onRejectPress"
+                text="{i18n>reject}"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+        </OverflowToolbar>
+
+        <Table
+            id="appChangeTable"
+            items="{/APP_CHANGESet}"
+            inset="false"
+            mode="SingleSelectMaster"
+            sticky="ColumnHeaders"
+            growing="true"
+            growingScrollToLoad="true"
+            growingThreshold="13"
+            width="100%"
+            fixedLayout="false"
+            updateFinished="_updateCountsFromModel"
+        >
+        
+            <columns>
+                <Column>
+                    <Text text="계약문서번호" />
+                </Column>
+                <Column>
+                    <Text text="납기 순번" />
+                </Column>
+                <Column>
+                    <Text text="변경 전 납기일" />
+                </Column>
+                <Column>
+                    <Text text="변경 요청일" />
+                </Column>
+                <Column>
+                    <Text text="상태" />
+                </Column>
+            </columns>
+
+            <items>
+                <ColumnListItem
+                    type="Active"
+                    press="onListItemPress"
+                >
+                    <cells>
+                        <Text text="{Vbeln}" />
+                        <Text text="{Seqno}" />
+                        <Text
+                            text="{path: 'BeforeDevDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+                        />
+                        <Text
+                            text="{path: 'DateChangeReq', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+                        />
+                        <ObjectStatus
+                            text="{Approve}"
+                            state="{= ${Approve} === 'A' ? 'Success' : ${Approve} === 'R' ? 'Error' : 'Warning'}"
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>
