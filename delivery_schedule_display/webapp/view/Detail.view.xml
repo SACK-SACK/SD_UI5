@@ -1,0 +1,346 @@
+<mvc:View
+    controllerName="sync.ca.sd.deliveryscheduledisplay.controller.Detail"
+    displayBlock="true"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    height="100%"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:VBox>
+                        <m:Label text="{i18n>vbeln}" />
+                        <m:Title
+                            text="{Vbeln}"
+                            wrapping="true"
+                            class="sapUiSmallMarginEnd"
+                        />
+                    </m:VBox>
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:FlexBox
+                        wrap="Wrap"
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <m:FlexBox
+                            wrap="NoWrap"
+                            fitContainer="true"
+                            alignItems="Center"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <m:Title
+                                text="{i18n>vbeln} {Vbeln}"
+                                wrapping="true"
+                                class="sapUiTinyMarginEnd"
+                            />
+                        </m:FlexBox>
+                    </m:FlexBox>
+                </snappedHeading>
+
+                <navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/midColumn/fullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/midColumn/exitFullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close middle column"
+                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"
+                    />
+                </navigationActions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            >
+                <m:HBox
+                    justifyContent="SpaceBetween"
+                    width="100%"
+                >
+                    <m:HBox>
+                        <!-- 고객 코드 -->
+                        <m:VBox
+                            class="sapUiSmallMarginEnd"
+                            alignItems="Start"
+                        >
+                            <m:Label
+                                text="{i18n>cuscode}"
+                                class="customLabel"
+                            />
+                            <m:Text
+                                text="{Cuscode}"
+                                class="customBoldLarge"
+                            />
+                        </m:VBox>
+
+                        <!-- 고객명 -->
+                        <m:VBox
+                            class="sapUiSmallMarginEnd"
+                            alignItems="Start"
+                        >
+                            <m:Label
+                                text="{i18n>cusname}"
+                                class="customLabel"
+                            />
+                            <m:Text
+                                text="{Cusname}"
+                                class="customBoldLarge"
+                            />
+                        </m:VBox>
+                    </m:HBox>
+
+                    <m:VBox alignItems="End">
+                        <m:Label text="{i18n>netvalsum}" />
+                        <m:ObjectNumber
+                            number="{
+        path: 'NetvalSum',
+        type: 'sap.ui.model.type.Float',
+        formatOptions: { maxFractionDigits: 0 }
+      }"
+                            unit="{Waers}"
+                            emphasized="true"
+                            class="sapMObjectNumberLarge"
+                        />
+                    </m:VBox>
+                </m:HBox>
+            </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="{i18n>duration}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                maxContainerCols="2"
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                columnsL="1"
+                                columnsM="1"
+                            >
+                                <form:content>
+                                    <m:VBox class="sapUiSmallMargin">
+                                        <m:HBox alignItems="Center">
+                                            <m:Label
+                                                text="계약 문서 번호 :"
+                                                class="sapUiSmallMarginEnd"
+                                            />
+                                            <m:Text text="{Vbeln}" />
+                                        </m:HBox>
+
+                                        <m:HBox
+                                            alignItems="Center"
+                                            class="sapUiTinyMarginTop"
+                                        >
+                                            <m:Label
+                                                text="남은 계약 일수 :"
+                                                class="sapUiSmallMarginEnd"
+                                            />
+                                            <m:Text
+                                                text="{= ${Contractduration} + ' D' }"
+                                            />
+                                        </m:HBox>
+
+                                        <m:HBox
+                                            alignItems="Center"
+                                            class="sapUiTinyMarginTop"
+                                        >
+                                            <m:Label
+                                                text="고객 코드:"
+                                                class="sapUiSmallMarginEnd"
+                                            />
+                                            <m:Text text="{Cuscode}" />
+                                        </m:HBox>
+
+                                        <m:HBox
+                                            alignItems="Center"
+                                            class="sapUiTinyMarginTop"
+                                        >
+                                            <m:Label
+                                                text="고객명:"
+                                                class="sapUiSmallMarginEnd"
+                                            />
+                                            <m:Text text="{Cusname}" />
+                                        </m:HBox>
+
+                                        <m:HBox
+                                            alignItems="Center"
+                                            class="sapUiTinyMarginTop"
+                                        >
+                                            <m:Label
+                                                text="계약 총 금액"
+                                                class="sapUiSmallMarginEnd"
+                                            />
+                                            <m:Text
+                                                text="{
+                                                    parts: [
+                                                        { path: 'NetvalSum' },
+                                                        { path: 'Waers' }
+                                                    ],
+                                                    type: 'sap.ui.model.type.Currency',
+                                                    formatOptions: {
+                                                        showMeasure: true,
+                                                        currencyCode: true,
+                                                        maxFractionDigits: 0
+                                                    }
+                                                }"
+                                            />
+                                        </m:HBox>
+                                    </m:VBox>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection title="{i18n>info}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:List
+                                id="infoTable"
+                                headerText="{i18n>detail_info}"
+                                mode="SingleSelectMaster"
+                                itemPress="onSectionPress"
+                            >
+                                <m:StandardListItem
+                                    title="{i18n>cusinfo}"
+                                    type="Navigation"
+                                >
+                                    <m:customData>
+                                        <core:CustomData
+                                            key="target"
+                                            value="customers"
+                                        />
+                                    </m:customData>
+                                </m:StandardListItem>
+
+                                <m:StandardListItem
+                                    title="{i18n>contract_info}"
+                                    type="Navigation"
+                                >
+                                    <m:customData>
+                                        <core:CustomData
+                                            key="target"
+                                            value="contracts"
+                                        />
+                                    </m:customData>
+                                </m:StandardListItem>
+
+                                <!-- <m:StandardListItem
+                                    title="{i18n>deliv_progress}"
+                                    type="Navigation"
+                                >
+                                    <m:customData>
+                                        <core:CustomData
+                                            key="target"
+                                            value="progress"
+                                        />
+                                    </m:customData>
+                                </m:StandardListItem> -->
+                            </m:List>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection title="{i18n>deliv_plan}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:VBox>
+                                <u:Calendar
+                                    id="calendar"
+                                    select="onCalendarSelect"
+                                    legend="legend"
+                                    nonWorkingDays="false"
+                                    width="80%"
+                                    specialDates="{calendarModel>/dates}"
+                                >
+                                    <u:specialDates>
+                                        <u:DateTypeRange
+                                            type="{calendarModel>type}"
+                                            startDate="{calendarModel>date}"
+                                        />
+                                    </u:specialDates>
+                                </u:Calendar>
+                                <u:CalendarLegend
+                                    id="legend"
+                                    standardItems="Today"
+                                >
+                                    <u:items>
+                                        <u:CalendarLegendItem
+                                            text="{i18n>deliv_plan}"
+                                            type="Type09"
+                                        />
+                                    </u:items>
+                                </u:CalendarLegend>
+                                <m:HBox>
+                                    <m:ToggleButton
+                                        text="Today"
+                                        press="handleSelectToday"
+                                        class="sapUiSmallMarginEnd"
+                                    />
+                                    <m:ToggleButton
+                                        text="Latest"
+                                        press="handleSelectLatest"
+                                    />
+                                </m:HBox>
+                                <m:HBox justifyContent="End">
+                                    <m:GenericTag
+                                        text="{
+                                                parts: [
+                                                { path: 'Vbegdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' } },
+                                                { path: 'Venddat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' } }
+                                                ],
+                                                formatter: '.formatter.dateRangeText'
+                                            }"
+                                        status="Information"
+                                    />
+                                </m:HBox>
+                            </m:VBox>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

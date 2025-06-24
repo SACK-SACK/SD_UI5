@@ -1,0 +1,10 @@
+/* style.css */
+.customBoldLarge {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.customLabel {
+  font-size: 1rem;
+  font-weight: 600;
+}

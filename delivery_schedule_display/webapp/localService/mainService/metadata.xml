@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCA_GW_310_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Contract" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="계약문서번호" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cuscode" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="고객 코드" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Cusname" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="고객명" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbegdat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="계약 시작일" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Venddat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="계약 종료일" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vuntdat" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="계약 체결일" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Totdelvnum" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="예상 납품 횟수" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NetvalSum" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="계약 총금액" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="통화코드" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Status7" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="계약 상태" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valdel" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="납품 주기 수치값" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valunit" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="납품 주기 단위" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bpadrr" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="회사주소" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveredCount" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="출고 일정 횟수" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="toContract" Relationship="ZCA_GW_310_SRV.Asso_Contract_Delivery" FromRole="FromRole_Asso_Contract_Delivery" ToRole="ToRole_Asso_Contract_Delivery"/>
+            </EntityType>
+            <EntityType Name="Contract_Agg" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Matnr"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="계약문서번호" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="자재코드" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Meins" sap:label="TOTAL_QTY" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="단위(kg)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="TotalAmount" Type="Edm.Decimal" Nullable="false" Precision="24" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="TOTAL_AMOUNT" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="통화코드" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <NavigationProperty Name="toAgg" Relationship="ZCA_GW_310_SRV.Asso_Contract_Delivery" FromRole="ToRole_Asso_Contract_Delivery" ToRole="FromRole_Asso_Contract_Delivery"/>
+            </EntityType>
+            <EntityType Name="Deliv_paln" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Vposn"/>
+                    <PropertyRef Name="Seqno"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="계약문서번호" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vposn" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="항목 번호" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Seqno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="납품 순번" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="자재코드" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DelivDate" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="납품일" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DelivQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Meins" sap:label="납품 수량" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="단위" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Status" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="결재 상태" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status2" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="대금 청구" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status4" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="출고" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusCredit" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label=" 여신점검 여부" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status8" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="판매 오더" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Asso_Contract_Delivery" sap:content-version="1">
+                <End Type="ZCA_GW_310_SRV.Contract" Multiplicity="1" Role="FromRole_Asso_Contract_Delivery"/>
+                <End Type="ZCA_GW_310_SRV.Contract_Agg" Multiplicity="*" Role="ToRole_Asso_Contract_Delivery"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Asso_Contract_Delivery">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Asso_Contract_Delivery">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZCA_GW_310_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ContractSet" EntityType="ZCA_GW_310_SRV.Contract" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Contract_AggSet" EntityType="ZCA_GW_310_SRV.Contract_Agg" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Deliv_palnSet" EntityType="ZCA_GW_310_SRV.Deliv_paln" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Asso_Contract_DeliverySet" Association="ZCA_GW_310_SRV.Asso_Contract_Delivery" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ContractSet" Role="FromRole_Asso_Contract_Delivery"/>
+                    <End EntitySet="Contract_AggSet" Role="ToRole_Asso_Contract_Delivery"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="http://61.97.134.34:8000/sap/opu/odata/sap/ZCA_GW_310_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://61.97.134.34:8000/sap/opu/odata/sap/ZCA_GW_310_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

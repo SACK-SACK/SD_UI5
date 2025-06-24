@@ -1,0 +1,58 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true"
+    controllerName="sync.ca.sd.deliveryscheduledisplay.controller.Main"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <List
+            id="contractList"
+            items="{/ContractSet}"
+            headerText="{i18n>contlist}"
+        >
+            <headerToolbar>
+                <Toolbar>
+                    <ToolbarSpacer />
+                    <SearchField
+                        width="20%"
+                        search=".onFilterList"
+                        liveChange=".onFilterList"
+                    />
+                </Toolbar>
+            </headerToolbar>
+            <ObjectListItem
+                title="{i18n>vbeln} {Vbeln}"
+                type="Active"
+                press="onListItemPress"
+                number="{
+                       parts:[ {path: 'i18n>netvalsum' },
+                              {path:'NetvalSum'},
+                              {path:'Waers'}
+                            ],
+                      formatter: '.formatter.combinedAmountText'
+                      }"
+                numberUnit="{Waers}"
+            >
+                <firstStatus>
+                    <ObjectStatus
+                        text="{ path: 'Plancreate', formatter: '.formatter.plancreateText' }"
+                        state="{
+                                path: 'Plancreate',
+                                formatter: '.formatter.plancreate'
+                              }"
+                        icon="{
+                                path: 'Plancreate',
+                                formatter: '.formatter.plancreateIcon'
+                              }"
+                    />
+                </firstStatus>
+                <ObjectAttribute text="{i18n>cuscode} {Cuscode}" />
+                <ObjectAttribute text=" {i18n>cusname} {Cusname}" />
+                <ObjectAttribute text="{i18n>contstop} {Status7}" />
+            </ObjectListItem>
+        </List>
+    </Page>
+</mvc:View>

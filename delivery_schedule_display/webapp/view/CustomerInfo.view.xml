@@ -1,0 +1,117 @@
+<mvc:View
+    controllerName="sync.ca.sd.deliveryscheduledisplay.controller.CustomerInfo"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    height="100%"
+>
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <m:FlexBox
+                        wrap="Wrap"
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <m:Title
+                            text="{i18n>cusinfo}"
+                            wrapping="true"
+                            class="sapUiTinyMarginEnd"
+                        />
+                    </m:FlexBox>
+                </f:heading>
+
+                <f:navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/endColumn/fullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/endColumn/exitFullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close end column"
+                        visible="{= ${/actionButtonsInfo/endColumn/closeColumn} !== null }"
+                    />
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <m:VBox class="sapUiSmallMargin">
+                <m:Title
+                    text="{i18n>cusdetailinfo}"
+                    level="H3"
+                    class="sapUiSmallMarginBottom"
+                />
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="고객 코드"
+                        width="7rem"
+                    />
+                    <m:Text text="{Cuscode}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="고객명"
+                        width="7rem"
+                    />
+                    <m:Text text="{Cusname}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="대표자명"
+                        width="7rem"
+                    />
+                    <m:Text text="{Bphaed}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="Email"
+                        width="7rem"
+                    />
+                    <m:Text text="{Email}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="회사 주소"
+                        width="7rem"
+                    />
+                    <m:Text text="{Bpadrr}" />
+                </m:HBox>
+            </m:VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

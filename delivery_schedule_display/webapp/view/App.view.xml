@@ -1,0 +1,62 @@
+<!-- <mvc:View controllerName="sync.ca.sd.deliveryscheduledisplay.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f">
+
+    <App id="app">
+        <pages>
+            <f:FlexibleColumnLayout
+                id="fclId"
+                layout="{app>/layout}"
+                stateChange=".onStateChanged">
+
+                <f:endColumnPages>
+                    <mvc:View xmlns="sap.m" 
+                              xmlns:mvc="sap.ui.core.mvc" 
+                              xmlns:f="sap.f"
+                              controllerName="sap.f.FlexibleColumnLayoutWithTwoColumnStart.controller.AboutPage"
+                              height="100%">
+
+                        <f:DynamicPage toggleHeaderOnTitleClick="false">
+                            <f:title>
+                                <f:DynamicPageTitle>
+                                    <f:heading>
+                                        <Title text="About supplier" />
+                                    </f:heading>
+
+                                    <f:navigationActions>
+                                        <OverflowToolbarButton 
+                                            type="Transparent" 
+                                            icon="sap-icon://decline" 
+                                            press="handleClose"  
+                                            tooltip="Close about page" />
+                                    </f:navigationActions>
+                                </f:DynamicPageTitle>
+                            </f:title>
+                        </f:DynamicPage>
+                    </mvc:View>
+                </f:endColumnPages>
+
+            </f:FlexibleColumnLayout>
+        </pages>
+    </App>
+</mvc:View> -->
+
+<mvc:View
+    controllerName="sync.ca.sd.deliveryscheduledisplay.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+>
+    <App id="app">
+        <f:FlexibleColumnLayout
+            id="fclId"
+            layout="{app>/layout}"
+            stateChange=".onStateChanged"
+            backgroundDesign="Solid"
+        />
+    </App>
+</mvc:View>
+
