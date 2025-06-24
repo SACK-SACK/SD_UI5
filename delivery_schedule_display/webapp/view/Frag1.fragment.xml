@@ -1,0 +1,114 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="delivDialog"
+        title="납기 내역"
+        contentWidth="600px"
+    >
+        <VBox class="sapUiSmallMargin sapUiMediumPadding">
+            <HBox
+                alignItems="Center"
+                class="sapUiSmallMarginBottom"
+            >
+                <Title
+                    text="{= '납기 순번: ' + ${fragModel>/items/0/Seqno} }"
+                    level="H4"
+                />
+            </HBox>
+
+            <HBox
+                alignItems="Center"
+                class="sapUiTinyMarginBottom"
+            >
+                <core:Icon
+                    src="sap-icon://status-positive"
+                    size="1rem"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Text
+                    text="{= '일정 결재 여부: ' + ( ${fragModel>/items/0/Status} ? '✅' : '❌' )}"
+                />
+            </HBox>
+
+            <HBox
+                alignItems="Center"
+                class="sapUiTinyMarginBottom"
+            >
+                <core:Icon
+                    src="sap-icon://sales-order"
+                    size="1rem"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Text
+                    text="{= '판매오더 생성 여부: ' + ( ${fragModel>/items/0/Status8} ? '✅' : '❌' )}"
+                />
+            </HBox>
+
+            <HBox
+                alignItems="Center"
+                class="sapUiTinyMarginBottom"
+            >
+                <core:Icon
+                    src="sap-icon://shipping-status"
+                    size="1rem"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Text
+                    text="{= '출고 여부: ' + ( ${fragModel>/items/0/Status4} ? '✅' : '❌' )}"
+                />
+            </HBox>
+
+            <HBox
+                alignItems="Center"
+                class="sapUiTinyMarginBottom"
+            >
+                <core:Icon
+                    src="sap-icon://business-objects-experience"
+                    size="1rem"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Text
+                    text="{= '대금 청구 여부: ' + ( ${fragModel>/items/0/Status2} ? '✅' : '❌' )}"
+                />
+            </HBox>
+        </VBox>
+
+        <ToolbarSeparator />
+
+        <List
+            items="{fragModel>/items}"
+            inset="false"
+        >
+            <StandardListItem
+                title="{fragModel>Maktx}"
+                description="{
+        parts: [
+            { value: '납기 수량: ', type: 'sap.ui.model.type.String' },
+            {
+                path: 'fragModel>DelivQty',
+                type: 'sap.ui.model.type.Float',
+                formatOptions: {
+                    minFractionDigits: 0,
+                    maxFractionDigits: 0
+                }
+            },
+            { value: ' ', type: 'sap.ui.model.type.String' },
+            { path: 'fragModel>Meins' }
+        ],
+        formatter: '.concat'
+    }"
+                icon="sap-icon://shipping-status"
+                iconInset="false"
+            />
+        </List>
+
+        <beginButton>
+            <Button
+                text="닫기"
+                press=".onCloseDialog"
+            />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

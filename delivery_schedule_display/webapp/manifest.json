@@ -1,0 +1,171 @@
+{
+    "_version": "1.60.0",
+    "sap.app": {
+        "id": "sync.ca.sd.deliveryscheduledisplay",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.16.5",
+            "toolsId": "d1fdc7f8-08c1-44f9-9f22-8dc490db069b"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZCA_GW_310_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.120.30",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "sync.ca.sd.deliveryscheduledisplay.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+              "app": {
+                        "type": "sap.ui.model.json.JSONModel",
+                        "settings": {}
+                     }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.f.routing.Router",
+                "clearControlAggregation": false,
+                "controlAggregation": "pages",
+                "controlId": "fclId",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "sync.ca.sd.deliveryscheduledisplay.view",
+                "async": true,
+                "viewPath": "sync.ca.sd.deliveryscheduledisplay.view"
+            },
+            "routes": [
+                {
+                    "name": "RouteMain",
+                    "pattern": ":layout:",
+                    "target": [
+                        "TargetMain"
+                    ]
+                },
+                {
+                    "name": "RouteDetail",
+                    "pattern": "detail/{vbeln}/{layout}",
+                    "target": [
+                        "TargetMain",
+                        "TargetDetail"
+                    ]
+                },
+                {                
+                    "name": "RouteCustomerInfo",
+                    "pattern": "detail/{vbeln}/{cuscode}/CustomerInfo/{layout}",
+                    "target": [
+                        "TargetMain",
+                        "TargetDetail",
+                        "TargetCustomerInfo"
+                    ]
+                
+                },
+                {
+                    "name": "RouteContractInfo",
+                    "pattern": "detail/{vbeln}/{cuscode}/ContractInfo/{layout}",
+                    "target":[
+                        "TargetMain",
+                        "TargetDetail",
+                        "TargetContractInfo"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetMain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "id": "Main",
+                    "name": "Main",
+                    "controlAggregation": "beginColumnPages"
+                },
+                "TargetDetail": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "id": "Detail",
+                    "name": "Detail",
+                    "controlAggregation": "midColumnPages"
+                },
+                "TargetCustomerInfo":{
+                    "viewType": "XML",
+                    "transition": "fade",
+                    "id":"CustomerInfo",
+                    "name":"CustomerInfo",
+                    "controlAggregation": "endColumnPages"
+                },
+                "TargetContractInfo":{
+                    "viewType": "XML",
+                    "transition": "fade",
+                    "id":"ContractInfo",
+                    "name": "ContractInfo",
+                    "controlAggregation": "endColumnPages"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "sync.ca.sd.deliveryscheduledisplay.view.App",
+            "type": "XML",
+            "id": "App",
+            "async": true
+        }
+    }
+}

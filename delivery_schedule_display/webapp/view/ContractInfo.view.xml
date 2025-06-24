@@ -1,0 +1,164 @@
+<mvc:View
+    controllerName="sync.ca.sd.deliveryscheduledisplay.controller.ContractInfo"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    height="100%"
+>
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <m:FlexBox
+                        wrap="Wrap"
+                        fitContainer="true"
+                        alignItems="Center"
+                    >
+                        <m:Title
+                            text="{i18n>contract_info}"
+                            wrapping="true"
+                            class="sapUiTinyMarginEnd"
+                        />
+                    </m:FlexBox>
+                </f:heading>
+
+                <f:navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/endColumn/fullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${app>/actionButtonsInfo/endColumn/exitFullScreen} !== null }"
+                    />
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close end column"
+                        visible="{= ${/actionButtonsInfo/endColumn/closeColumn} !== null }"
+                    />
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <m:VBox
+                class="sapUiSmallMargin"
+            >
+               
+                <m:Title
+                    text="계약 상세 정보"
+                    level="H3"
+                    class="sapUiSmallMarginBottom"
+                />
+
+                <!-- 계약 문서 번호 -->
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="계약 문서번호"
+                        width="9rem"
+                    />
+                    <m:Text text="{Vbeln}" />
+                </m:HBox>
+
+                <!-- 계약 체결일 -->
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="계약 체결일"
+                        width="9rem"
+                    />
+                    <m:Text
+                        text="{path: 'Vuntdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+                    />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="계약 시작일"
+                        width="9rem"
+                    />
+                    <m:Text
+                        text="{path: 'Vbegdat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+                    />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="계약 종료일"
+                        width="9rem"
+                    />
+                    <m:Text
+                        text="{path: 'Venddat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd' }}"
+                    />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="납기 주기"
+                        width="9rem"
+                    />
+                    <m:Text text="{Valdel} {Valunit}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="총 납기 횟수"
+                        width="9rem"
+                    />
+                    <m:Text text="{= ${Totdelvnum} + '회'}" />
+                </m:HBox>
+
+                <m:HBox
+                    alignItems="Center"
+                    class="sapUiSmallMarginBottom"
+                >
+                    <m:Label
+                        text="계약 총금액"
+                        width="9rem"
+                    />
+                    <m:Text
+                        text="{
+                            parts: [
+                                { path: 'NetvalSum' },
+                                { path: 'Waers' }
+                            ],
+                            type: 'sap.ui.model.type.Currency',
+                            formatOptions: {
+                                showMeasure: true,
+                                currencyCode: true,
+                                maxFractionDigits: 0
+                            }
+                        }"
+                    />
+
+                </m:HBox>
+            </m:VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
